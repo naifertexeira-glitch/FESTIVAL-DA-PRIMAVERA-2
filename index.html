@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campeonato Festival da Primavera - Colégio Bom Jesus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --verde-bomjesus: #1b5e20;
+            --verde-hover: #2e7d32;
+            --verde-gradiente: linear-gradient(135deg, #1b5e20 0%, #0d3b10 100%);
+            --fundo-app: #f0f4f1;
+            --card-fundo: #ffffff;
+            --texto-principal: #2c3e50;
+            --texto-secundario: #607d8b;
+            --borda-suave: #e2e8f0;
+            --cor-verde: #2e7d32;
+            --cor-amarelo: #f59e0b;
+            --cor-vermelho: #ef4444;
+            --cor-azul: #2563eb;
+        }
+        * { box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--fundo-app); margin: 0; padding: 0; color: var(--texto-principal); }
+
+        header {
+            background: var(--verde-gradiente);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        header .logo-container { display: flex; align-items: center; gap: 20px; }
+        header img.logo-app {
+            max-height: 65px; background: white; padding: 5px; border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1); object-fit: contain;
+        }
+        header h1 { margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.5px; }
+        header .subtitulo { opacity: 0.8; font-size: 13px; margin-top: 3px; }
+
+        nav.tabs-nav {
+            background: #ffffff; display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 20px;
+            border-bottom: 1px solid var(--borda-suave); box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            position: sticky; top: 0; z-index: 10;
+        }
+
+        nav.tabs-nav button {
+            background-color: transparent; color: var(--texto-secundario); border: none;
+            padding: 10px 16px; border-radius: 8px; cursor: pointer; font-size: 13.5px;
+            font-weight: 600; transition: all 0.2s ease; white-space: nowrap;
+        }
+
+        nav.tabs-nav button:hover { background-color: #e8f5e9; color: var(--verde-bomjesus); }
+        nav.tabs-nav button.active {
+            background-color: var(--verde-bomjesus); color: white;
+            box-shadow: 0 3px 10px rgba(27, 94, 32, 0.3);
+        }
+
+        .container { padding: 30px 20px; max-width: 1250px; margin: 0 auto; }
+        .tab-content {
+            display: none; background: var(--card-fundo); padding: 28px; border-radius: 16px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.05); border: 1px solid var(--borda-suave);
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tab-content.active { display: block; }
+        h2 {
+            color: var(--verde-bomjesus); font-size: 20px; margin-top: 0; margin-bottom: 20px;
+            border-bottom: 2px solid #e8f5e9; padding-bottom: 10px; display: flex; align-items: center; gap: 10px;
+        }
+
+        .form-group { margin-bottom: 18px; }
+        label { display: block; font-weight: 600; font-size: 13px; margin-bottom: 6px; color: var(--texto-principal); }
+        input[type="text"], input[type="number"], select, textarea, input[type="file"] {
+            width: 100%; padding: 11px 14px; border: 1.5px solid var(--borda-suave); border-radius: 8px;
+            background: #fafafa; font-size: 14px; transition: all 0.2s;
+        }
+
+        button.btn {
+            background-color: var(--verde-bomjesus); color: white; padding: 10px 18px; border: none;
+            border-radius: 8px; cursor: pointer; font-size: 13.5px; font-weight: 600; transition: all 0.2s;
+            box-shadow: 0 3px 10px rgba(27, 94, 32, 0.2); display: inline-flex; align-items: center; gap: 6px;
+        }
+        button.btn:hover { background-color: var(--verde-hover); transform: translateY(-1px); }
+        button.btn-warning { background-color: #f59e0b; box-shadow: 0 3px 10px rgba(245, 158, 11, 0.2); }
+        button.btn-warning:hover { background-color: #d97706; }
+        button.btn-danger { background-color: #ef4444; box-shadow: 0 3px 10px rgba(239, 68, 68, 0.2); }
+        button.btn-danger:hover { background-color: #dc2626; }
+
+        table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 15px; border-radius: 10px; overflow: hidden; border: 1px solid var(--borda-suave); }
+        th { background-color: #f8fafc; color: var(--texto-secundario); font-weight: 700; font-size: 13px; text-transform: uppercase; padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--borda-suave); }
+        td { padding: 14px 16px; border-bottom: 1px solid var(--borda-suave); font-size: 14px; }
+        .acoes-celula { display: flex; gap: 8px; }
+
+        .equipes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
+        .card-equipe { border-radius: 14px; padding: 20px; color: white; box-shadow: 0 6px 15px rgba(0,0,0,0.08); }
+        .card-equipe.verde { background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%); }
+        .card-equipe.amarelo { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        .card-equipe.vermelho { background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%); }
+        .card-equipe.azul { background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); }
+        .card-equipe img { width: 70px; height: 70px; object-fit: cover; display: block; margin: 10px auto; background: white; border-radius: 50%; padding: 4px; }
+        .card-equipe ul { padding-left: 20px; margin-bottom: 0; font-size: 13.5px; max-height: 300px; overflow-y: auto; }
+
+        .painel-boletim-config { background: #f8fafc; border: 1px solid var(--borda-suave); border-radius: 12px; padding: 20px; margin-bottom: 25px; }
+        .grid-opcoes-boletim { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; margin-top: 15px; }
+        .opcao-check { display: flex; align-items: center; gap: 10px; background: #ffffff; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--borda-suave); cursor: pointer; font-weight: 500; font-size: 13.5px; }
+        .boletim-folha { background: white; border: 2px dashed #cbd5e1; padding: 30px; border-radius: 12px; margin-top: 20px; }
+
+        @media print {
+            body { background: white !important; color: black !important; }
+            header, nav, button, .no-print, .painel-boletim-config { display: none !important; }
+            .container { max-width: 100% !important; padding: 0 !important; margin: 0 !important; }
+            .tab-content { display: block !important; box-shadow: none !important; border: none !important; padding: 0 !important; }
+            .boletim-folha { border: none !important; padding: 0 !important; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img id="img-logo-evento" class="logo-app" src="" alt="Logo" style="display:none;">
+            <div>
+                <h1 id="txt-titulo-evento">Festival da Primavera - Colégio Bom Jesus</h1>
+                <div id="txt-subtitulo-evento" class="subtitulo">Painel de Controle Esportivo & Social</div>
+            </div>
+        </div>
+        <small id="txt-tag-evento" style="background: rgba(255,255,255,0.15); padding: 6px 12px; border-radius: 20px;">Fundamental I</small>
+    </header>
+
+    <nav class="tabs-nav" id="menu-abas">
+        <button class="tab-link active" onclick="openTab(event, 'aba-classificacao-geral')">🏆 Classificação Geral</button>
+        <button class="tab-link" onclick="openTab(event, 'aba-classificacao-turma')">📊 Classificação por Turma</button>
+        <button class="tab-link" onclick="openTab(event, 'aba-gerenciar-turmas')">🏫 Cadastrar Turmas</button>
+        <button class="tab-link" onclick="openTab(event, 'aba-alunos-turma')">👨‍🎓 Alunos por Turma</button>
+        <button class="tab-link" onclick="openTab(event, 'aba-todos-alunos-cores')">🎨 Alunos por Cor (Geral)</button>
+        <button class="tab-link" onclick="openTab(event, 'aba-cadastro-sorteio')">🎲 Cadastro e Sorteio</button>
+        <button class="tab-link" onclick="openTab(event, 'aba-provas')">🎯 Cadastrar Provas</button>
+        <button class="tab-link" onclick="openTab(event, 'aba-rodadas')">⚡ Lançar/Editar Rodadas</button>
+        <button class="tab-link" onclick="openTab(event, 'aba-arrecadacao')">📦 Arrecadação</button>
+        <button class="tab-link" onclick="openTab(event, 'aba-boletins')">🖨️ Boletins Informativos</button>
+        <button class="tab-link" onclick="openTab(event, 'aba-editar-cabecalho')">✏️ Editar Cabeçalho</button>
+        <button class="tab-link" onclick="openTab(event, 'aba-configuracoes')">⚙️ Personalização & Fotos</button>
+    </nav>
+
+    <div class="container">
+        <!-- ABA 1: CLASSIFICAÇÃO GERAL -->
+        <div id="aba-classificacao-geral" class="tab-content active">
+            <h2>🏆 Classificação Geral das Equipes</h2>
+            <table>
+                <thead>
+                    <tr><th>Posição</th><th>Equipe</th><th>Pontuação Total</th></tr>
+                </thead>
+                <tbody id="tabela-classificacao-geral"></tbody>
+            </table>
+        </div>
+
+        <!-- ABA 2: CLASSIFICAÇÃO POR TURMA -->
+        <div id="aba-classificacao-turma" class="tab-content">
+            <h2>📊 Classificação por Turma</h2>
+            <div class="form-group">
+                <label>Selecione a Turma:</label>
+                <select id="select-filtro-turma-classificacao" onchange="atualizarClassificacaoPorTurma()">
+                    <option value="">Selecione...</option>
+                </select>
+            </div>
+            <table>
+                <thead>
+                    <tr><th>Posição</th><th>Equipe</th><th>Pontuação na Turma</th></tr>
+                </thead>
+                <tbody id="tabela-classificacao-turma"></tbody>
+            </table>
+        </div>
+
+        <!-- ABA 3: INCLUIR/GERENCIAR TURMAS -->
+        <div id="aba-gerenciar-turmas" class="tab-content">
+            <h2>🏫 Gerenciar Turmas</h2>
+            <input type="hidden" id="input-id-turma-edicao" value="">
+            <div class="form-group">
+                <label>Nome da Turma (Ex: 1º Ano A, 2º Ano B):</label>
+                <input type="text" id="input-nome-turma" placeholder="Digite o nome da turma...">
+            </div>
+            <div class="form-group">
+                <label>Imagem / Logo da Turma (Opcional):</label>
+                <input type="file" id="input-foto-turma" accept="image/*">
+            </div>
+            <div style="display:flex; gap:10px;">
+                <button class="btn" id="btn-salvar-turma" onclick="adicionarOuAtualizarTurma()">Cadastrar Turma</button>
+                <button class="btn btn-warning" id="btn-cancelar-turma" onclick="cancelarEdicaoTurma()" style="display:none;">Cancelar Edição</button>
+            </div>
+
+            <h3>Turmas Cadastradas</h3>
+            <table>
+                <thead>
+                    <tr><th>Imagem</th><th>Nome da Turma</th><th style="width: 200px;">Ações</th></tr>
+                </thead>
+                <tbody id="tabela-lista-turmas"></tbody>
+            </table>
+        </div>
+
+        <!-- NOVA ABA: ALUNOS POR TURMA (Entrar na turma & Refazer Sorteio) -->
+        <div id="aba-alunos-turma" class="tab-content">
+            <h2>👨‍🎓 Visualizar e Gerenciar Alunos da Turma</h2>
+            <div class="form-group">
+                <label>Selecione a Turma:</label>
+                <select id="select-visualizar-turma" onchange="carregarAlunosDaTurma()">
+                    <option value="">Selecione uma turma...</option>
+                </select>
+            </div>
+            
+            <div id="painel-detalhes-turma" style="display: none;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3 id="titulo-turma-selecionada" style="margin: 0; color: var(--verde-bomjesus);"></h3>
+                    <button class="btn btn-warning" onclick="refazerSorteioDaTurmaAtual()">🎲 Refazer Sorteio Desta Turma</button>
+                </div>
+                <div class="equipes-grid" id="grid-alunos-turma-selecionada"></div>
+            </div>
+        </div>
+
+        <!-- ABA 4: TODOS OS ALUNOS POR COR -->
+        <div id="aba-todos-alunos-cores" class="tab-content">
+            <h2>🎨 Visão Geral de Alunos por Cor</h2>
+            <p style="color: var(--texto-secundario); margin-bottom: 20px;">Quantitativo total e lista completa de alunos agrupados em toda a escola.</p>
+            <div class="equipes-grid" id="grid-geral-cores"></div>
+        </div>
+
+        <!-- ABA 5: CADASTRO EM LOTE E SORTEIO -->
+        <div id="aba-cadastro-sorteio" class="tab-content">
+            <h2>🎲 Cadastro de Alunos e Sorteio por Cores</h2>
+            <div class="form-group">
+                <label>Selecione a Turma:</label>
+                <select id="select-turma-sorteio"></select>
+            </div>
+            <div class="form-group">
+                <label>Cole a lista de Alunos (Um aluno por linha):</label>
+                <textarea id="lista-alunos-lote" rows="8" placeholder="Exemplo:&#10;Ana Silva&#10;Bruno Souza&#10;Carlos Eduardo"></textarea>
+            </div>
+            <button class="btn" onclick="realizarSorteio()">Realizar Sorteio Automático</button>
+        </div>
+
+        <!-- ABA 6: ATIVIDADES E PROVAS -->
+        <div id="aba-provas" class="tab-content">
+            <h2>🎯 Gerenciar Atividades / Provas</h2>
+            <p><strong>Pontuação Padrão:</strong> 1º Lugar: 40 pts | 2º Lugar: 30 pts | 3º Lugar: 20 pts | 4º Lugar: 10 pts</p>
+            <input type="hidden" id="input-id-prova-edicao" value="">
+            <div class="form-group">
+                <label>Nome da Atividade/Prova:</label>
+                <input type="text" id="input-nome-prova" placeholder="Ex: Corrida do Saco, Dança, etc.">
+            </div>
+            <div style="display:flex; gap:10px;">
+                <button class="btn" id="btn-salvar-prova" onclick="cadastrarOuAtualizarProva()">Cadastrar Prova</button>
+                <button class="btn btn-warning" id="btn-cancelar-prova" onclick="cancelarEdicaoProva()" style="display:none;">Cancelar Edição</button>
+            </div>
+
+            <h3>Provas Cadastradas</h3>
+            <table>
+                <thead>
+                    <tr><th>Nome da Prova</th><th style="width: 200px;">Ações</th></tr>
+                </thead>
+                <tbody id="tabela-provas-corpo"></tbody>
+            </table>
+        </div>
+
+        <!-- ABA 7: RODADAS -->
+        <div id="aba-rodadas" class="tab-content">
+            <h2>⚡ Lançar / Editar Rodadas</h2>
+            <input type="hidden" id="input-id-rodada-edicao" value="">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div class="form-group"><label>Selecione a Turma:</label><select id="select-turma-rodada"></select></div>
+                <div class="form-group"><label>Selecione a Prova:</label><select id="select-prova-rodada"></select></div>
+            </div>
+
+            <h4>Resultado das Colocações:</h4>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
+                <div class="form-group"><label>1º Lugar (40 pts):</label><select id="res-1"></select></div>
+                <div class="form-group"><label>2º Lugar (30 pts):</label><select id="res-2"></select></div>
+                <div class="form-group"><label>3º Lugar (20 pts):</label><select id="res-3"></select></div>
+                <div class="form-group"><label>4º Lugar (10 pts):</label><select id="res-4"></select></div>
+            </div>
+
+            <div style="display:flex; gap:10px;">
+                <button class="btn" id="btn-salvar-rodada" onclick="salvarRodada()">Salvar Resultado da Rodada</button>
+                <button class="btn btn-warning" id="btn-cancelar-rodada" onclick="cancelarEdicaoRodada()" style="display:none;">Cancelar Edição</button>
+            </div>
+
+            <h3>Histórico de Rodadas</h3>
+            <table>
+                <thead>
+                    <tr><th>Turma</th><th>Prova</th><th>Resultados</th><th style="width: 200px;">Ações</th></tr>
+                </thead>
+                <tbody id="tabela-historico-rodadas"></tbody>
+            </table>
+        </div>
+
+        <!-- ABA 8: ARRECADAÇÃO -->
+        <div id="aba-arrecadacao" class="tab-content">
+            <h2>📦 Campanha de Arrecadação</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div class="form-group"><label>Turma:</label><select id="select-turma-arrecadacao"></select></div>
+                <div class="form-group">
+                    <label>Equipe/Cor:</label>
+                    <select id="select-equipe-arrecadacao">
+                        <option value="Verde">Verde</option><option value="Amarelo">Amarelo</option>
+                        <option value="Vermelho">Vermelho</option><option value="Azul">Azul</option>
+                    </select>
+                </div>
+            </div>
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 15px;">
+                <div class="form-group"><label>Item Arrecadado:</label><input type="text" id="input-item-arrecadacao" placeholder="Ex: Alimentos (Kg), Agasalhos"></div>
+                <div class="form-group"><label>Quantidade / Pontos:</label><input type="number" id="input-qtd-arrecadacao" value="1"></div>
+            </div>
+            <button class="btn" onclick="adicionarArrecadacao()">Registrar Arrecadação</button>
+
+            <h3>Itens Registrados</h3>
+            <table>
+                <thead>
+                    <tr><th>Turma</th><th>Equipe</th><th>Item</th><th>Qtd/Pontos</th><th style="width: 100px;">Ação</th></tr>
+                </thead>
+                <tbody id="tabela-arrecadacao"></tbody>
+            </table>
+        </div>
+
+        <!-- ABA 9: BOLETIM IMPRESSO -->
+        <div id="aba-boletins" class="tab-content">
+            <h2>🖨️ Gerador de Boletim Informativo Impresso</h2>
+            <div class="painel-boletim-config no-print">
+                <h3>Escolha o que deseja incluir na impressão:</h3>
+                <div class="grid-opcoes-boletim">
+                    <label class="opcao-check"><input type="checkbox" id="chk-imprimir-logo" checked onchange="gerarBoletimPersonalizado()"> Exibir Logo no Cabeçalho</label>
+                    <label class="opcao-check"><input type="checkbox" id="chk-imprimir-classificacao-geral" checked onchange="gerarBoletimPersonalizado()"> Classificação Geral das Equipes</label>
+                    <label class="opcao-check"><input type="checkbox" id="chk-imprimir-alunos-geral" onchange="gerarBoletimPersonalizado()"> Alunos por Cor (Escola Toda)</label>
+                    <label class="opcao-check"><input type="checkbox" id="chk-imprimir-classificacao-turmas" onchange="gerarBoletimPersonalizado()"> Classificação por Turma</label>
+                    <label class="opcao-check"><input type="checkbox" id="chk-imprimir-alunos-turmas" onchange="gerarBoletimPersonalizado()"> Lista de Alunos por Turma</label>
+                    <label class="opcao-check"><input type="checkbox" id="chk-imprimir-rodadas" onchange="gerarBoletimPersonalizado()"> Histórico de Rodadas / Provas</label>
+                    <label class="opcao-check"><input type="checkbox" id="chk-imprimir-arrecadacao" onchange="gerarBoletimPersonalizado()"> Resumo de Arrecadação</label>
+                </div>
+                <button class="btn" style="margin-top: 15px;" onclick="window.print()">🖨️ Imprimir Boletim Configurado</button>
+            </div>
+            <div class="boletim-folha" id="boletim-conteudo-dinamico"></div>
+        </div>
+
+        <!-- ABA 10: EDITAR CABEÇALHO -->
+        <div id="aba-editar-cabecalho" class="tab-content">
+            <h2>✏️ Editar Cabeçalho Superior</h2>
+            <div class="form-group"><label>Título Principal:</label><input type="text" id="input-edit-titulo-cabecalho"></div>
+            <div class="form-group"><label>Subtítulo:</label><input type="text" id="input-edit-subtitulo-cabecalho"></div>
+            <div class="form-group"><label>Tag de Categoria:</label><input type="text" id="input-edit-tag-cabecalho"></div>
+            <button class="btn" onclick="salvarTextosCabecalho()">Salvar Alterações</button>
+        </div>
+
+        <!-- ABA 11: PERSONALIZAÇÃO & FOTOS -->
+        <div id="aba-configuracoes" class="tab-content">
+            <h2>⚙️ Personalização do Nome e Logotipos</h2>
+            <div class="form-group">
+                <label>Nome Oficial da Competição:</label>
+                <input type="text" id="input-edit-titulo">
+                <button class="btn" style="margin-top: 8px;" onclick="salvarTituloEvento()">Atualizar Nome</button>
+            </div>
+            <div class="form-group">
+                <label>Logotipo do Evento/Escola:</label>
+                <input type="file" accept="image/*" onchange="carregarImagemLocal(event, 'img-logo-evento')">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let dados = {
+            turmas: [],
+            provas: [],
+            rodadas: [],
+            arrecadacao: [],
+            config: {
+                titulo: "Festival da Primavera - Colégio Bom Jesus",
+                subtitulo: "Painel de Controle Esportivo & Social",
+                tag: "Fundamental I",
+                logoEvento: "",
+                logosEquipes: { Verde: "", Amarelo: "", Vermelho: "", Azul: "" }
+            }
+        };
+
+        const CORES = ['Verde', 'Amarelo', 'Vermelho', 'Azul'];
+        const PONTOS_POSICAO = { 1: 40, 2: 30, 3: 20, 4: 10 };
+
+        function salvarDados() {
+            try {
+                localStorage.setItem('campeonato_dados', JSON.stringify(dados));
+            } catch (erro) {
+                if (erro.name === 'QuotaExceededError') {
+                    alert('⚠️ Armazenamento do navegador cheio. Tente não carregar imagens muito grandes.');
+                }
+            }
+        }
+
+        function carregarDados() {
+            const dadosSalvos = localStorage.getItem('campeonato_dados');
+            if (dadosSalvos) {
+                try {
+                    dados = JSON.parse(dadosSalvos);
+                } catch (e) {
+                    console.error("Erro ao ler LocalStorage", e);
+                }
+            }
+            restaurarInterface();
+        }
+
+        function openTab(evt, tabName) {
+            let contents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < contents.length; i++) contents[i].classList.remove("active");
+            let links = document.getElementsByClassName("tab-link");
+            for (let i = 0; i < links.length; i++) links[i].classList.remove("active");
+            document.getElementById(tabName).classList.add("active");
+            if(evt) evt.currentTarget.classList.add("active");
+        }
+
+        function restaurarInterface() {
+            if (dados.config) {
+                document.getElementById('txt-titulo-evento').innerText = dados.config.titulo || "";
+                document.getElementById('txt-subtitulo-evento').innerText = dados.config.subtitulo || "";
+                document.getElementById('txt-tag-evento').innerText = dados.config.tag || "";
+                document.getElementById('input-edit-titulo-cabecalho').value = dados.config.titulo || "";
+                document.getElementById('input-edit-subtitulo-cabecalho').value = dados.config.subtitulo || "";
+                document.getElementById('input-edit-tag-cabecalho').value = dados.config.tag || "";
+                if(dados.config.logoEvento) {
+                    const img = document.getElementById('img-logo-evento');
+                    img.src = dados.config.logoEvento;
+                    img.style.display = 'block';
+                }
+            }
+            renderizarTurmas();
+            renderizarProvas();
+            renderizarRodadas();
+            renderizarArrecadacao();
+            atualizarSelects();
+            atualizarClassificacaoGeral();
+            renderizarAlunosPorCorGeral();
+            carregarAlunosDaTurma();
+            gerarBoletimPersonalizado();
+        }
+
+        // --- GERENCIAR TURMAS ---
+        function adicionarOuAtualizarTurma() {
+            const id = document.getElementById('input-id-turma-edicao').value;
+            const nome = document.getElementById('input-nome-turma').value.trim();
+            const fotoInput = document.getElementById('input-foto-turma');
+
+            if (!nome) return alert('Digite o nome da turma!');
+
+            const processarSalvar = (fotoBase64) => {
+                if (id) {
+                    let turma = dados.turmas.find(t => t.id == id);
+                    if (turma) {
+                        turma.nome = nome;
+                        if (fotoBase64) turma.foto = fotoBase64;
+                    }
+                } else {
+                    dados.turmas.push({
+                        id: Date.now(),
+                        nome: nome,
+                        foto: fotoBase64 || '',
+                        alunos: { Verde: [], Amarelo: [], Vermelho: [], Azul: [] }
+                    });
+                }
+                salvarDados();
+                cancelarEdicaoTurma();
+                restaurarInterface();
+            };
+
+            if (fotoInput.files && fotoInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = e => processarSalvar(e.target.result);
+                reader.readAsDataURL(fotoInput.files[0]);
+            } else {
+                processarSalvar(null);
+            }
+        }
+
+        function editarTurma(id) {
+            let turma = dados.turmas.find(t => t.id == id);
+            if (!turma) return;
+            document.getElementById('input-id-turma-edicao').value = turma.id;
+            document.getElementById('input-nome-turma').value = turma.nome;
+            document.getElementById('btn-salvar-turma').innerText = "Atualizar Turma";
+            document.getElementById('btn-cancelar-turma').style.display = "inline-flex";
+        }
+
+        function cancelarEdicaoTurma() {
+            document.getElementById('input-id-turma-edicao').value = "";
+            document.getElementById('input-nome-turma').value = "";
+            document.getElementById('input-foto-turma').value = "";
+            document.getElementById('btn-salvar-turma').innerText = "Cadastrar Turma";
+            document.getElementById('btn-cancelar-turma').style.display = "none";
+        }
+
+        function excluirTurma(id) {
+            if (confirm("Tem certeza que deseja excluir esta turma? Todos os lançamentos vinculados serão mantidos ou removidos.")) {
+                dados.turmas = dados.turmas.filter(t => t.id != id);
+                dados.rodadas = dados.rodadas.filter(r => r.turmaId != id);
+                dados.arrecadacao = dados.arrecadacao.filter(a => a.turmaId != id);
+                salvarDados();
+                restaurarInterface();
+            }
+        }
+
+        function renderizarTurmas() {
+            const tbody = document.getElementById('tabela-lista-turmas');
+            tbody.innerHTML = '';
+            dados.turmas.forEach(t => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td><img src="${t.foto || 'https://via.placeholder.com/40'}" style="width:40px;height:40px;border-radius:6px;object-fit:cover;"></td>
+                        <td><strong>${t.nome}</strong></td>
+                        <td class="acoes-celula">
+                            <button class="btn btn-warning" onclick="editarTurma(${t.id})">✏️ Editar</button>
+                            <button class="btn btn-danger" onclick="excluirTurma(${t.id})">🗑️ Excluir</button>
+                        </td>
+                    </tr>`;
+            });
+        }
+
+        // --- SORTEIO E GERENCIAMENTO DE ALUNOS ---
+        function realizarSorteio() {
+            const turmaId = document.getElementById('select-turma-sorteio').value;
+            const texto = document.getElementById('lista-alunos-lote').value.trim();
+            if (!turmaId) return alert('Selecione uma turma!');
+            if (!texto) return alert('Insira a lista de alunos!');
+
+            let alunos = texto.split('\n').map(a => a.trim()).filter(a => a.length > 0);
+            alunos.sort(() => Math.random() - 0.5);
+
+            let turma = dados.turmas.find(t => t.id == turmaId);
+            turma.alunos = { Verde: [], Amarelo: [], Vermelho: [], Azul: [] };
+
+            alunos.forEach((aluno, index) => {
+                let cor = CORES[index % CORES.length];
+                turma.alunos[cor].push(aluno);
+            });
+
+            salvarDados();
+            alert('Sorteio realizado com sucesso!');
+            document.getElementById('lista-alunos-lote').value = '';
+            restaurarInterface();
+        }
+
+        function carregarAlunosDaTurma() {
+            const turmaId = document.getElementById('select-visualizar-turma').value;
+            const painel = document.getElementById('painel-detalhes-turma');
+            const grid = document.getElementById('grid-alunos-turma-selecionada');
+            
+            if (!turmaId) {
+                painel.style.display = 'none';
+                return;
+            }
+
+            const turma = dados.turmas.find(t => t.id == turmaId);
+            if (!turma) return;
+
+            painel.style.display = 'block';
+            document.getElementById('titulo-turma-selecionada').innerText = `Alunos da Turma: ${turma.nome}`;
+            grid.innerHTML = '';
+
+            CORES.forEach(cor => {
+                const lista = (turma.alunos && turma.alunos[cor]) ? turma.alunos[cor] : [];
+                grid.innerHTML += `
+                    <div class="card-equipe ${cor.toLowerCase()}">
+                        <h3>Equipe ${cor} (${lista.length})</h3>
+                        <ul>
+                            ${lista.map(aluno => `<li>${aluno}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            });
+        }
+
+        function refazerSorteioDaTurmaAtual() {
+            const turmaId = document.getElementById('select-visualizar-turma').value;
+            if (!turmaId) return alert('Selecione uma turma primeiro!');
+
+            let turma = dados.turmas.find(t => t.id == turmaId);
+            if (!turma || !turma.alunos) return;
+
+            let todosAlunos = [];
+            CORES.forEach(c => {
+                if (turma.alunos[c]) todosAlunos.push(...turma.alunos[c]);
+            });
+
+            if (todosAlunos.length === 0) {
+                return alert('Nenhum aluno cadastrado nesta turma para realizar o sorteio.');
+            }
+
+            if (!confirm(`Deseja refazer o sorteio de ${todosAlunos.length} alunos da turma ${turma.nome}?`)) return;
+
+            todosAlunos.sort(() => Math.random() - 0.5);
+            turma.alunos = { Verde: [], Amarelo: [], Vermelho: [], Azul: [] };
+
+            todosAlunos.forEach((aluno, index) => {
+                let cor = CORES[index % CORES.length];
+                turma.alunos[cor].push(aluno);
+            });
+
+            salvarDados();
+            carregarAlunosDaTurma();
+            renderizarAlunosPorCorGeral();
+            alert('Sorteio da turma refeito com sucesso!');
+        }
+
+        // --- GERENCIAR PROVAS ---
+        function cadastrarOuAtualizarProva() {
+            const id = document.getElementById('input-id-prova-edicao').value;
+            const nome = document.getElementById('input-nome-prova').value.trim();
+            if (!nome) return alert('Digite o nome da prova!');
+
+            if (id) {
+                let prova = dados.provas.find(p => p.id == id);
+                if (prova) prova.nome = nome;
+            } else {
+                dados.provas.push({ id: Date.now(), nome: nome });
+            }
+
+            salvarDados();
+            cancelarEdicaoProva();
+            restaurarInterface();
+        }
+
+        function editarProva(id) {
+            let prova = dados.provas.find(p => p.id == id);
+            if (!prova) return;
+            document.getElementById('input-id-prova-edicao').value = prova.id;
+            document.getElementById('input-nome-prova').value = prova.nome;
+            document.getElementById('btn-salvar-prova').innerText = "Atualizar Prova";
+            document.getElementById('btn-cancelar-prova').style.display = "inline-flex";
+        }
+
+        function cancelarEdicaoProva() {
+            document.getElementById('input-id-prova-edicao').value = "";
+            document.getElementById('input-nome-prova').value = "";
+            document.getElementById('btn-salvar-prova').innerText = "Cadastrar Prova";
+            document.getElementById('btn-cancelar-prova').style.display = "none";
+        }
+
+        function excluirProva(id) {
+            if (confirm("Excluir esta prova?")) {
+                dados.provas = dados.provas.filter(p => p.id != id);
+                dados.rodadas = dados.rodadas.filter(r => r.provaId != id);
+                salvarDados();
+                restaurarInterface();
+            }
+        }
+
+        function renderizarProvas() {
+            const tbody = document.getElementById('tabela-provas-corpo');
+            tbody.innerHTML = '';
+            dados.provas.forEach(p => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td><strong>${p.nome}</strong></td>
+                        <td class="acoes-celula">
+                            <button class="btn btn-warning" onclick="editarProva(${p.id})">✏️ Editar</button>
+                            <button class="btn btn-danger" onclick="excluirProva(${p.id})">🗑️ Excluir</button>
+                        </td>
+                    </tr>`;
+            });
+        }
+
+        // --- RODADAS ---
+        function salvarRodada() {
+            const id = document.getElementById('input-id-rodada-edicao').value;
+            const turmaId = document.getElementById('select-turma-rodada').value;
+            const provaId = document.getElementById('select-prova-rodada').value;
+
+            const res = {
+                1: document.getElementById('res-1').value,
+                2: document.getElementById('res-2').value,
+                3: document.getElementById('res-3').value,
+                4: document.getElementById('res-4').value
+            };
+
+            const selecionados = Object.values(res);
+            if (new Set(selecionados).size !== 4) return alert('Cada colocação deve ser de uma cor diferente!');
+
+            if (id) {
+                let rodada = dados.rodadas.find(r => r.id == id);
+                if (rodada) { rodada.turmaId = turmaId; rodada.provaId = provaId; rodada.resultados = res; }
+            } else {
+                dados.rodadas.push({ id: Date.now(), turmaId, provaId, resultados: res });
+            }
+
+            salvarDados();
+            cancelarEdicaoRodada();
+            restaurarInterface();
+        }
+
+        function editarRodada(id) {
+            let r = dados.rodadas.find(x => x.id == id);
+            if (!r) return;
+            document.getElementById('input-id-rodada-edicao').value = r.id;
+            document.getElementById('select-turma-rodada').value = r.turmaId;
+            document.getElementById('select-prova-rodada').value = r.provaId;
+            document.getElementById('res-1').value = r.resultados[1];
+            document.getElementById('res-2').value = r.resultados[2];
+            document.getElementById('res-3').value = r.resultados[3];
+            document.getElementById('res-4').value = r.resultados[4];
+            document.getElementById('btn-salvar-rodada').innerText = "Atualizar Rodada";
+            document.getElementById('btn-cancelar-rodada').style.display = "inline-flex";
+        }
+
+        function cancelarEdicaoRodada() {
+            document.getElementById('input-id-rodada-edicao').value = "";
+            document.getElementById('btn-salvar-rodada').innerText = "Salvar Resultado da Rodada";
+            document.getElementById('btn-cancelar-rodada').style.display = "none";
+        }
+
+        function excluirRodada(id) {
+            if (confirm("Excluir esta rodada?")) {
+                dados.rodadas = dados.rodadas.filter(r => r.id != id);
+                salvarDados();
+                restaurarInterface();
+            }
+        }
+
+        function renderizarRodadas() {
+            const tbody = document.getElementById('tabela-historico-rodadas');
+            tbody.innerHTML = '';
+            dados.rodadas.forEach(r => {
+                let turma = dados.turmas.find(t => t.id == r.turmaId);
+                let prova = dados.provas.find(p => p.id == r.provaId);
+                tbody.innerHTML += `
+                    <tr>
+                        <td><strong>${turma ? turma.nome : 'N/A'}</strong></td>
+                        <td>${prova ? prova.nome : 'N/A'}</td>
+                        <td>1º: ${r.resultados[1]} | 2º: ${r.resultados[2]} | 3º: ${r.resultados[3]} | 4º: ${r.resultados[4]}</td>
+                        <td class="acoes-celula">
+                            <button class="btn btn-warning" onclick="editarRodada(${r.id})">✏️ Editar</button>
+                            <button class="btn btn-danger" onclick="excluirRodada(${r.id})">🗑️ Excluir</button>
+                        </td>
+                    </tr>`;
+            });
+        }
+
+        // --- ARRECADACÃO ---
+        function adicionarArrecadacao() {
+            const turmaId = document.getElementById('select-turma-arrecadacao').value;
+            const equipe = document.getElementById('select-equipe-arrecadacao').value;
+            const item = document.getElementById('input-item-arrecadacao').value.trim();
+            const qtd = parseFloat(document.getElementById('input-qtd-arrecadacao').value);
+
+            if (!item || isNaN(qtd)) return alert('Preencha os campos corretamente!');
+
+            dados.arrecadacao.push({ id: Date.now(), turmaId, equipe, item, qtd });
+            salvarDados();
+            document.getElementById('input-item-arrecadacao').value = '';
+            restaurarInterface();
+        }
+
+        function excluirArrecadacao(id) {
+            dados.arrecadacao = dados.arrecadacao.filter(a => a.id != id);
+            salvarDados();
+            restaurarInterface();
+        }
+
+        function renderizarArrecadacao() {
+            const tbody = document.getElementById('tabela-arrecadacao');
+            tbody.innerHTML = '';
+            dados.arrecadacao.forEach(a => {
+                let turma = dados.turmas.find(t => t.id == a.turmaId);
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${turma ? turma.nome : 'N/A'}</td>
+                        <td><strong>${a.equipe}</strong></td>
+                        <td>${a.item}</td>
+                        <td>${a.qtd}</td>
+                        <td><button class="btn btn-danger" onclick="excluirArrecadacao(${a.id})">🗑️</button></td>
+                    </tr>`;
+            });
+        }
+
+        // --- AUXILIARES & CLASSIFICAÇÃO ---
+        function atualizarSelects() {
+            const selectsTurma = ['select-filtro-turma-classificacao', 'select-turma-sorteio', 'select-visualizar-turma', 'select-turma-rodada', 'select-turma-arrecadacao'];
+            selectsTurma.forEach(id => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                const valorAtual = el.value;
+                el.innerHTML = id === 'select-filtro-turma-classificacao' || id === 'select-visualizar-turma' ? '<option value="">Selecione...</option>' : '';
+                dados.turmas.forEach(t => {
+                    el.innerHTML += `<option value="${t.id}">${t.nome}</option>`;
+                });
+                el.value = valorAtual;
+            });
+
+            const selectProva = document.getElementById('select-prova-rodada');
+            if (selectProva) {
+                selectProva.innerHTML = '';
+                dados.provas.forEach(p => {
+                    selectProva.innerHTML += `<option value="${p.id}">${p.nome}</option>`;
+                });
+            }
+
+            const selectsCores = ['res-1', 'res-2', 'res-3', 'res-4'];
+            selectsCores.forEach((id, idx) => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                el.innerHTML = '';
+                CORES.forEach(c => {
+                    el.innerHTML += `<option value="${c}">${c}</option>`;
+                });
+                el.selectedIndex = idx;
+            });
+        }
+
+        function atualizarClassificacaoGeral() {
+            let pontos = { Verde: 0, Amarelo: 0, Vermelho: 0, Azul: 0 };
+
+            dados.rodadas.forEach(r => {
+                for (let pos in r.resultados) {
+                    let cor = r.resultados[pos];
+                    if (pontos[cor] !== undefined) pontos[cor] += PONTOS_POSICAO[pos];
+                }
+            });
+
+            dados.arrecadacao.forEach(a => {
+                if (pontos[a.equipe] !== undefined) pontos[a.equipe] += a.qtd;
+            });
+
+            let ranking = Object.keys(pontos).map(cor => ({ cor, pts: pontos[cor] }));
+            ranking.sort((a, b) => b.pts - a.pts);
+
+            const tbody = document.getElementById('tabela-classificacao-geral');
+            tbody.innerHTML = '';
+            ranking.forEach((item, index) => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td><strong>${index + 1}º Lugar</strong></td>
+                        <td>${item.cor}</td>
+                        <td><strong>${item.pts} pts</strong></td>
+                    </tr>`;
+            });
+        }
+
+        function atualizarClassificacaoPorTurma() {
+            const turmaId = document.getElementById('select-filtro-turma-classificacao').value;
+            const tbody = document.getElementById('tabela-classificacao-turma');
+            tbody.innerHTML = '';
+
+            if (!turmaId) return;
+
+            let pontos = { Verde: 0, Amarelo: 0, Vermelho: 0, Azul: 0 };
+
+            dados.rodadas.filter(r => r.turmaId == turmaId).forEach(r => {
+                for (let pos in r.resultados) {
+                    let cor = r.resultados[pos];
+                    if (pontos[cor] !== undefined) pontos[cor] += PONTOS_POSICAO[pos];
+                }
+            });
+
+            dados.arrecadacao.filter(a => a.turmaId == turmaId).forEach(a => {
+                if (pontos[a.equipe] !== undefined) pontos[a.equipe] += a.qtd;
+            });
+
+            let ranking = Object.keys(pontos).map(cor => ({ cor, pts: pontos[cor] }));
+            ranking.sort((a, b) => b.pts - a.pts);
+
+            ranking.forEach((item, index) => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td><strong>${index + 1}º Lugar</strong></td>
+                        <td>${item.cor}</td>
+                        <td><strong>${item.pts} pts</strong></td>
+                    </tr>`;
+            });
+        }
+
+        function renderizarAlunosPorCorGeral() {
+            const grid = document.getElementById('grid-geral-cores');
+            grid.innerHTML = '';
+
+            CORES.forEach(cor => {
+                let lista = [];
+                dados.turmas.forEach(t => {
+                    if (t.alunos && t.alunos[cor]) {
+                        t.alunos[cor].forEach(aluno => lista.push(`${aluno} (${t.nome})`));
+                    }
+                });
+
+                grid.innerHTML += `
+                    <div class="card-equipe ${cor.toLowerCase()}">
+                        <h3>Equipe ${cor} (${lista.length})</h3>
+                        <ul>
+                            ${lista.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                    </div>`;
+            });
+        }
+
+        function salvarTextosCabecalho() {
+            dados.config.titulo = document.getElementById('input-edit-titulo-cabecalho').value;
+            dados.config.subtitulo = document.getElementById('input-edit-subtitulo-cabecalho').value;
+            dados.config.tag = document.getElementById('input-edit-tag-cabecalho').value;
+            salvarDados();
+            restaurarInterface();
+            alert('Cabeçalho atualizado com sucesso!');
+        }
+
+        function salvarTituloEvento() {
+            dados.config.titulo = document.getElementById('input-edit-titulo').value;
+            salvarDados();
+            restaurarInterface();
+            alert('Título atualizado com sucesso!');
+        }
+
+        function carregarImagemLocal(e, idElemento) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                dados.config.logoEvento = evt.target.result;
+                salvarDados();
+                restaurarInterface();
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function gerarBoletimPersonalizado() {
+            const container = document.getElementById('boletim-conteudo-dinamico');
+            let html = '';
+
+            if (document.getElementById('chk-imprimir-logo').checked) {
+                html += `
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        ${dados.config.logoEvento ? `<img src="${dados.config.logoEvento}" style="max-height: 80px; display: block; margin: 0 auto 10px;">` : ''}
+                        <h1 style="margin: 0; color: var(--verde-bomjesus);">${dados.config.titulo}</h1>
+                        <p style="margin: 5px 0;">${dados.config.subtitulo} - ${dados.config.tag}</p>
+                        <hr style="border: 0; border-top: 1px solid #ccc; margin-top: 15px;">
+                    </div>`;
+            }
+
+            if (document.getElementById('chk-imprimir-classificacao-geral').checked) {
+                html += `<h3>🏆 Classificação Geral</h3>` + document.getElementById('aba-classificacao-geral').querySelector('table').outerHTML + `<br>`;
+            }
+
+            if (document.getElementById('chk-imprimir-alunos-geral').checked) {
+                html += `<h3>🎨 Lista Geral de Alunos por Cor</h3>` + document.getElementById('grid-geral-cores').outerHTML + `<br>`;
+            }
+
+            container.innerHTML = html || '<p style="text-align: center;">Nenhuma opção selecionada para o boletim.</p>';
+        }
+
+        window.onload = carregarDados;
+    </script>
+</body>
+</html>
