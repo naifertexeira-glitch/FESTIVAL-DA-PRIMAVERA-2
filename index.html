@@ -23,23 +23,6 @@
         * { box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background-color: var(--fundo-app); margin: 0; padding: 0; color: var(--texto-principal); }
 
-        /* BANNER DE GERENCIAMENTO DE CAMPEONATOS */
-        .bar-campeonatos {
-            background: #ffffff;
-            padding: 12px 20px;
-            border-bottom: 2px solid var(--borda-suave);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-            flex-wrap: wrap;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        .bar-campeonatos .seletor-container { display: flex; align-items: center; gap: 10px; }
-        .bar-campeonatos label { font-weight: 700; margin: 0; color: var(--verde-bomjesus); font-size: 14px; white-space: nowrap; }
-        .bar-campeonatos select { width: auto; padding: 8px 14px; margin: 0; font-weight: 600; border: 1.5px solid var(--verde-bomjesus); border-radius: 8px; background: #f0fdf4; color: var(--verde-bomjesus); }
-        .bar-campeonatos .acoes-camp { display: flex; gap: 8px; flex-wrap: wrap; }
-
         header {
             background: var(--verde-gradiente);
             color: white;
@@ -49,6 +32,7 @@
             justify-content: space-between;
             box-shadow: 0 4px 20px rgba(0,0,0,0.15);
         }
+
         header .logo-container { display: flex; align-items: center; gap: 20px; }
         header img.logo-app {
             max-height: 65px; background: white; padding: 5px; border-radius: 12px;
@@ -62,11 +46,13 @@
             border-bottom: 1px solid var(--borda-suave); box-shadow: 0 2px 10px rgba(0,0,0,0.03);
             position: sticky; top: 0; z-index: 10;
         }
+
         nav.tabs-nav button {
             background-color: transparent; color: var(--texto-secundario); border: none;
             padding: 10px 16px; border-radius: 8px; cursor: pointer; font-size: 13.5px;
             font-weight: 600; transition: all 0.2s ease; white-space: nowrap;
         }
+
         nav.tabs-nav button:hover { background-color: #e8f5e9; color: var(--verde-bomjesus); }
         nav.tabs-nav button.active {
             background-color: var(--verde-bomjesus); color: white;
@@ -79,10 +65,12 @@
             box-shadow: 0 4px 25px rgba(0,0,0,0.05); border: 1px solid var(--borda-suave);
             animation: fadeIn 0.3s ease-in-out;
         }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(6px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
         .tab-content.active { display: block; }
         h2 {
             color: var(--verde-bomjesus); font-size: 20px; margin-top: 0; margin-bottom: 20px;
@@ -119,56 +107,36 @@
         .card-equipe.vermelho { background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%); }
         .card-equipe.azul { background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); }
         .card-equipe img { width: 70px; height: 70px; object-fit: cover; display: block; margin: 10px auto; background: white; border-radius: 50%; padding: 4px; }
-        .card-equipe ul { padding-left: 0; list-style: none; margin-bottom: 0; font-size: 13.5px; max-height: 300px; overflow-y: auto; }
-        
-        .item-aluno {
-            display: flex; justify-content: space-between; align-items: center;
-            background: rgba(255, 255, 255, 0.15); padding: 6px 10px; margin-bottom: 6px;
-            border-radius: 6px; word-break: break-word;
-        }
-        .btn-excluir-aluno {
-            background: rgba(255,255,255,0.3); border: none; color: white;
-            border-radius: 4px; cursor: pointer; padding: 2px 6px; font-size: 11px;
-            font-weight: bold; transition: background 0.2s; margin-left: 8px;
-        }
-        .btn-excluir-aluno:hover { background: #dc2626; }
-
-        .painel-add-aluno {
-            background: #f8fafc; border: 1px solid var(--borda-suave); border-radius: 12px;
-            padding: 16px; margin-bottom: 20px; display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap;
-        }
+        .card-equipe ul { padding-left: 20px; margin-bottom: 0; font-size: 13.5px; max-height: 300px; overflow-y: auto; }
 
         .painel-boletim-config { background: #f8fafc; border: 1px solid var(--borda-suave); border-radius: 12px; padding: 20px; margin-bottom: 25px; }
         .grid-opcoes-boletim { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; margin-top: 15px; }
         .opcao-check { display: flex; align-items: center; gap: 10px; background: #ffffff; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--borda-suave); cursor: pointer; font-weight: 500; font-size: 13.5px; }
         .boletim-folha { background: white; border: 2px dashed #cbd5e1; padding: 30px; border-radius: 12px; margin-top: 20px; }
 
+        /* Estilos específicos para Impressão de Turma por Cores */
+        .grid-impressao-turma { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-top: 20px; }
+        .coluna-impressao-cor { border: 1px solid var(--borda-suave); border-radius: 8px; padding: 12px; background: #fff; }
+        .coluna-impressao-cor h4 { margin: 0 0 10px 0; padding: 8px; color: white; text-align: center; border-radius: 6px; font-size: 14px; }
+        .coluna-impressao-cor.verde h4 { background: #2e7d32; }
+        .coluna-impressao-cor.amarelo h4 { background: #d97706; }
+        .coluna-impressao-cor.vermelho h4 { background: #dc2626; }
+        .coluna-impressao-cor.azul h4 { background: #2563eb; }
+        .coluna-impressao-cor ol { padding-left: 18px; margin: 0; font-size: 13px; }
+        .coluna-impressao-cor li { margin-bottom: 6px; border-bottom: 1px dashed #e2e8f0; padding-bottom: 2px; }
+
         @media print {
             body { background: white !important; color: black !important; }
-            header, nav, button, .no-print, .painel-boletim-config, .bar-campeonatos, .painel-add-aluno { display: none !important; }
+            header, nav, button, .no-print, .painel-boletim-config { display: none !important; }
             .container { max-width: 100% !important; padding: 0 !important; margin: 0 !important; }
             .tab-content { display: block !important; box-shadow: none !important; border: none !important; padding: 0 !important; }
             .boletim-folha { border: none !important; padding: 0 !important; }
+            .grid-impressao-turma { grid-template-columns: repeat(4, 1fr) !important; gap: 10px !important; }
+            .coluna-impressao-cor h4 { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
     </style>
 </head>
 <body>
-
-    <!-- GERENCIAMENTO DE HISTÓRICO DE CAMPEONATOS -->
-    <div class="bar-campeonatos no-print">
-        <div class="seletor-container">
-            <label for="seletor-campeonatos">🏆 Campeonato Ativo:</label>
-            <select id="seletor-campeonatos" onchange="trocarCampeonato(this.value)">
-                <!-- Opções carregadas dinamicamente -->
-            </select>
-        </div>
-        <div class="acoes-camp">
-            <button class="btn" onclick="novoCampeonato()" style="padding: 7px 12px; font-size: 12.5px;">➕ Criar Novo Campeonato (Zerado)</button>
-            <button class="btn btn-warning" onclick="duplicarFormatoParaNovoAno()" style="padding: 7px 12px; font-size: 12.5px;">📋 Reutilizar Estrutura Para Novo Ano</button>
-            <button class="btn btn-danger" onclick="excluirCampeonatoAtual()" style="padding: 7px 12px; font-size: 12.5px;">🗑️ Excluir Selecionado</button>
-        </div>
-    </div>
-
     <header>
         <div class="logo-container">
             <img id="img-logo-evento" class="logo-app" src="" alt="Logo" style="display:none;">
@@ -186,7 +154,7 @@
         <button class="tab-link" onclick="openTab(event, 'aba-gerenciar-turmas')">🏫 Cadastrar Turmas</button>
         <button class="tab-link" onclick="openTab(event, 'aba-alunos-turma')">👨‍🎓 Alunos por Turma</button>
         <button class="tab-link" onclick="openTab(event, 'aba-todos-alunos-cores')">🎨 Alunos por Cor (Geral)</button>
-        <button class="tab-link" onclick="openTab(event, 'aba-cadastro-sorteio')">🎲 Cadastro em Lote e Sorteio</button>
+        <button class="tab-link" onclick="openTab(event, 'aba-cadastro-sorteio')">🎲 Cadastro e Sorteio</button>
         <button class="tab-link" onclick="openTab(event, 'aba-provas')">🎯 Cadastrar Provas</button>
         <button class="tab-link" onclick="openTab(event, 'aba-rodadas')">⚡ Lançar/Editar Rodadas</button>
         <button class="tab-link" onclick="openTab(event, 'aba-arrecadacao')">📦 Arrecadação</button>
@@ -250,7 +218,7 @@
             </table>
         </div>
 
-        <!-- ABA: ALUNOS POR TURMA (COM ADIÇÃO E REMOÇÃO INDIVIDUAL) -->
+        <!-- ABA: ALUNOS POR TURMA -->
         <div id="aba-alunos-turma" class="tab-content">
             <h2>👨‍🎓 Visualizar e Gerenciar Alunos da Turma</h2>
             <div class="form-group">
@@ -259,26 +227,8 @@
                     <option value="">Selecione uma turma...</option>
                 </select>
             </div>
-                        
+            
             <div id="painel-detalhes-turma" style="display: none;">
-                <!-- NOVO PAINEL: ADICIONAR ALUNO INDIVIDUAL -->
-                <div class="painel-add-aluno no-print">
-                    <div style="flex: 2; min-width: 200px;">
-                        <label for="input-nome-novo-aluno"><strong>Nome do Aluno:</strong></label>
-                        <input type="text" id="input-nome-novo-aluno" placeholder="Digite o nome completo do aluno..." style="margin: 0;">
-                    </div>
-                    <div style="flex: 1; min-width: 130px;">
-                        <label for="select-cor-novo-aluno"><strong>Equipe / Cor:</strong></label>
-                        <select id="select-cor-novo-aluno" style="margin: 0;">
-                            <option value="Verde">Verde</option>
-                            <option value="Amarelo">Amarelo</option>
-                            <option value="Vermelho">Vermelho</option>
-                            <option value="Azul">Azul</option>
-                        </select>
-                    </div>
-                    <button class="btn" onclick="adicionarAlunoIndividualManualmente()">➕ Adicionar Aluno</button>
-                </div>
-
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                     <h3 id="titulo-turma-selecionada" style="margin: 0; color: var(--verde-bomjesus);"></h3>
                     <button class="btn btn-warning" onclick="refazerSorteioDaTurmaAtual()">🎲 Refazer Sorteio Desta Turma</button>
@@ -296,7 +246,7 @@
 
         <!-- ABA 5: CADASTRO EM LOTE E SORTEIO -->
         <div id="aba-cadastro-sorteio" class="tab-content">
-            <h2>🎲 Cadastro em Lote e Sorteio de Alunos por Cores</h2>
+            <h2>🎲 Cadastro de Alunos e Sorteio por Cores</h2>
             <div class="form-group">
                 <label>Selecione a Turma:</label>
                 <select id="select-turma-sorteio"></select>
@@ -390,11 +340,30 @@
             </table>
         </div>
 
-        <!-- ABA 9: BOLETIM IMPRESSO -->
+        <!-- ABA 9: BOLETIM IMPRESSO E IMPRESSÃO DE TURMA -->
         <div id="aba-boletins" class="tab-content">
-            <h2>🖨️ Gerador de Boletim Informativo Impresso</h2>
+            <h2>🖨️ Gerador de Boletim e Ficha de Turma Impressa</h2>
             <div class="painel-boletim-config no-print">
-                <h3>Escolha o que deseja incluir na impressão:</h3>
+                <h3>Opções de Impressão Rápidas por Turma:</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+                    <div class="form-group">
+                        <label>Imprimir Apenas Uma Turma Específica:</label>
+                        <select id="select-imprimir-turma-unica" onchange="gerarBoletimPersonalizado()">
+                            <option value="">-- Imprimir Relatório Geral (Todas) --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Modelo do Relatório da Turma:</label>
+                        <select id="select-tipo-impressao-turma" onchange="gerarBoletimPersonalizado()">
+                            <option value="ficha-cores">📄 Ficha de Alunos da Turma Divididos por Cores</option>
+                            <option value="resumo">📊 Resumo do Desempenho Completo da Turma</option>
+                        </select>
+                    </div>
+                </div>
+
+                <hr style="border: none; border-top: 1px dashed var(--borda-suave); margin: 20px 0;">
+
+                <h3>Opções Gerais do Boletim (Quando Sem Turma Selecionada):</h3>
                 <div class="grid-opcoes-boletim">
                     <label class="opcao-check"><input type="checkbox" id="chk-imprimir-logo" checked onchange="gerarBoletimPersonalizado()"> Exibir Logo no Cabeçalho</label>
                     <label class="opcao-check"><input type="checkbox" id="chk-imprimir-classificacao-geral" checked onchange="gerarBoletimPersonalizado()"> Classificação Geral das Equipes</label>
@@ -404,7 +373,7 @@
                     <label class="opcao-check"><input type="checkbox" id="chk-imprimir-rodadas" onchange="gerarBoletimPersonalizado()"> Histórico de Rodadas / Provas</label>
                     <label class="opcao-check"><input type="checkbox" id="chk-imprimir-arrecadacao" onchange="gerarBoletimPersonalizado()"> Resumo de Arrecadação</label>
                 </div>
-                <button class="btn" style="margin-top: 15px;" onclick="window.print()">🖨️ Imprimir Boletim Configurado</button>
+                <button class="btn" style="margin-top: 15px;" onclick="window.print()">🖨️ Imprimir Seleção</button>
             </div>
             <div class="boletim-folha" id="boletim-conteudo-dinamico"></div>
         </div>
@@ -434,177 +403,45 @@
     </div>
 
     <script>
-        // ESTRUTURA PARA MÚLTIPLOS CAMPEONATOS
-        let historicoCampeonatos = JSON.parse(localStorage.getItem('campeonato_historico')) || {
-            ativoId: '2026_default',
-            lista: {
-                '2026_default': {
-                    id: '2026_default',
-                    nome: 'Festival da Primavera 2026',
-                    turmas: [],
-                    provas: [],
-                    rodadas: [],
-                    arrecadacao: [],
-                    config: {
-                        titulo: "Festival da Primavera - Colégio Bom Jesus",
-                        subtitulo: "Painel de Controle Esportivo & Social",
-                        tag: "Fundamental I",
-                        logoEvento: "",
-                        logosEquipes: { Verde: "", Amarelo: "", Vermelho: "", Azul: "" }
-                    }
-                }
+        let dados = {
+            turmas: [],
+            provas: [],
+            rodadas: [],
+            arrecadacao: [],
+            config: {
+                titulo: "Festival da Primavera - Colégio Bom Jesus",
+                subtitulo: "Painel de Controle Esportivo & Social",
+                tag: "Fundamental I",
+                logoEvento: "",
+                logosEquipes: { Verde: "", Amarelo: "", Vermelho: "", Azul: "" }
             }
         };
-
-        // Migração de dados antigos se existirem
-        const dadosAntigos = localStorage.getItem('campeonato_dados');
-        if (dadosAntigos && !localStorage.getItem('campeonato_historico')) {
-            try {
-                historicoCampeonatos.lista['2026_default'] = JSON.parse(dadosAntigos);
-                historicoCampeonatos.lista['2026_default'].nome = historicoCampeonatos.lista['2026_default'].config.titulo || "Festival da Primavera 2026";
-            } catch(e) {}
-        }
-
-        let dados = historicoCampeonatos.lista[historicoCampeonatos.ativoId] || Object.values(historicoCampeonatos.lista)[0];
 
         const CORES = ['Verde', 'Amarelo', 'Vermelho', 'Azul'];
         const PONTOS_POSICAO = { 1: 40, 2: 30, 3: 20, 4: 10 };
 
         function salvarDados() {
             try {
-                historicoCampeonatos.lista[historicoCampeonatos.ativoId] = dados;
-                localStorage.setItem('campeonato_historico', JSON.stringify(historicoCampeonatos));
+                localStorage.setItem('campeonato_dados', JSON.stringify(dados));
             } catch (erro) {
                 if (erro.name === 'QuotaExceededError') {
-                    alert('⚠️ Armazenamento do navegador cheio. Tente carregar imagens menores.');
+                    alert('⚠️ Armazenamento do navegador cheio. Tente não carregar imagens muito grandes.');
                 }
             }
         }
 
         function carregarDados() {
-            const salvos = localStorage.getItem('campeonato_historico');
-            if (salvos) {
+            const dadosSalvos = localStorage.getItem('campeonato_dados');
+            if (dadosSalvos) {
                 try {
-                    historicoCampeonatos = JSON.parse(salvos);
-                    if (!historicoCampeonatos.lista[historicoCampeonatos.ativoId]) {
-                        historicoCampeonatos.ativoId = Object.keys(historicoCampeonatos.lista)[0];
-                    }
-                    dados = historicoCampeonatos.lista[historicoCampeonatos.ativoId];
+                    dados = JSON.parse(dadosSalvos);
                 } catch (e) {
                     console.error("Erro ao ler LocalStorage", e);
                 }
             }
-            atualizarDropdownCampeonatos();
             restaurarInterface();
         }
 
-        // --- GERENCIAMENTO DE CAMPEONATOS E ANOS ---
-        function atualizarDropdownCampeonatos() {
-            const select = document.getElementById('seletor-campeonatos');
-            if (!select) return;
-            select.innerHTML = '';
-            
-            Object.keys(historicoCampeonatos.lista).forEach(id => {
-                const camp = historicoCampeonatos.lista[id];
-                const option = document.createElement('option');
-                option.value = id;
-                option.textContent = camp.nome || camp.config.titulo;
-                if (id === historicoCampeonatos.ativoId) option.selected = true;
-                select.appendChild(option);
-            });
-        }
-
-        function trocarCampeonato(id) {
-            historicoCampeonatos.ativoId = id;
-            dados = historicoCampeonatos.lista[id];
-            salvarDados();
-            restaurarInterface();
-        }
-
-        function novoCampeonato() {
-            const nome = prompt("Digite o nome para o Novo Campeonato / Edição:");
-            if (!nome || !nome.trim()) return;
-
-            const novoId = 'camp_' + Date.now();
-            historicoCampeonatos.lista[novoId] = {
-                id: novoId,
-                nome: nome.trim(),
-                turmas: [],
-                provas: [],
-                rodadas: [],
-                arrecadacao: [],
-                config: {
-                    titulo: nome.trim(),
-                    subtitulo: "Painel de Controle Esportivo & Social",
-                    tag: "Fundamental I",
-                    logoEvento: "",
-                    logosEquipes: { Verde: "", Amarelo: "", Vermelho: "", Azul: "" }
-                }
-            };
-
-            historicoCampeonatos.ativoId = novoId;
-            dados = historicoCampeonatos.lista[novoId];
-            salvarDados();
-            atualizarDropdownCampeonatos();
-            restaurarInterface();
-            alert(`Novo campeonato "${nome}" criado com sucesso!`);
-        }
-
-        function duplicarFormatoParaNovoAno() {
-            const nome = prompt("Digite o nome da nova edição (Ex: Festival 2027):");
-            if (!nome || !nome.trim()) return;
-
-            const novoId = 'camp_' + Date.now();
-            
-            // Clona turmas mantendo logos/nomes mas esvaziando alunos
-            const turmasClonadas = dados.turmas.map(t => ({
-                id: t.id,
-                nome: t.nome,
-                foto: t.foto,
-                alunos: { Verde: [], Amarelo: [], Vermelho: [], Azul: [] }
-            }));
-
-            // Clona provas
-            const provasClonadas = JSON.parse(JSON.stringify(dados.provas));
-
-            historicoCampeonatos.lista[novoId] = {
-                id: novoId,
-                nome: nome.trim(),
-                turmas: turmasClonadas,
-                provas: provasClonadas,
-                rodadas: [],
-                arrecadacao: [],
-                config: { 
-                    ...dados.config,
-                    titulo: nome.trim()
-                }
-            };
-
-            historicoCampeonatos.ativoId = novoId;
-            dados = historicoCampeonatos.lista[novoId];
-            salvarDados();
-            atualizarDropdownCampeonatos();
-            restaurarInterface();
-            alert(`Novo campeonato "${nome}" criado utilizando a estrutura de turmas e provas do evento anterior!`);
-        }
-
-        function excluirCampeonatoAtual() {
-            const listaIds = Object.keys(historicoCampeonatos.lista);
-            if (listaIds.length <= 1) {
-                return alert("Não é possível excluir! O sistema deve manter pelo menos um campeonato registrado.");
-            }
-
-            if (confirm(`Tem certeza que deseja apagar permanentemente o campeonato "${dados.nome}"?`)) {
-                delete historicoCampeonatos.lista[historicoCampeonatos.ativoId];
-                historicoCampeonatos.ativoId = Object.keys(historicoCampeonatos.lista)[0];
-                dados = historicoCampeonatos.lista[historicoCampeonatos.ativoId];
-                salvarDados();
-                atualizarDropdownCampeonatos();
-                restaurarInterface();
-            }
-        }
-
-        // --- NAVEGAÇÃO ENTRE ABAS ---
         function openTab(evt, tabName) {
             let contents = document.getElementsByClassName("tab-content");
             for (let i = 0; i < contents.length; i++) contents[i].classList.remove("active");
@@ -622,14 +459,10 @@
                 document.getElementById('input-edit-titulo-cabecalho').value = dados.config.titulo || "";
                 document.getElementById('input-edit-subtitulo-cabecalho').value = dados.config.subtitulo || "";
                 document.getElementById('input-edit-tag-cabecalho').value = dados.config.tag || "";
-                document.getElementById('input-edit-titulo').value = dados.config.titulo || "";
-                
-                const img = document.getElementById('img-logo-evento');
                 if(dados.config.logoEvento) {
+                    const img = document.getElementById('img-logo-evento');
                     img.src = dados.config.logoEvento;
                     img.style.display = 'block';
-                } else {
-                    img.style.display = 'none';
                 }
             }
             renderizarTurmas();
@@ -643,6 +476,48 @@
             gerarBoletimPersonalizado();
         }
 
+        function atualizarSelects() {
+            const selectsTurma = [
+                'select-filtro-turma-classificacao', 'select-visualizar-turma', 
+                'select-turma-sorteio', 'select-turma-rodada', 'select-turma-arrecadacao',
+                'select-imprimir-turma-unica'
+            ];
+
+            selectsTurma.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    const valorAnterior = el.value;
+                    el.innerHTML = id === 'select-imprimir-turma-unica' 
+                        ? '<option value="">-- Imprimir Relatório Geral (Todas) --</option>' 
+                        : '<option value="">Selecione a Turma...</option>';
+                    
+                    dados.turmas.forEach(t => {
+                        el.innerHTML += `<option value="${t.id}">${t.nome}</option>`;
+                    });
+                    el.value = valorAnterior;
+                }
+            });
+
+            const selProva = document.getElementById('select-prova-rodada');
+            if(selProva) {
+                const val = selProva.value;
+                selProva.innerHTML = '<option value="">Selecione a Prova...</option>';
+                dados.provas.forEach(p => { selProva.innerHTML += `<option value="${p.id}">${p.nome}</option>`; });
+                selProva.value = val;
+            }
+
+            const selCores = ['res-1', 'res-2', 'res-3', 'res-4'];
+            selCores.forEach((id) => {
+                const el = document.getElementById(id);
+                if(el) {
+                    const val = el.value;
+                    el.innerHTML = '<option value="">Selecione...</option>';
+                    CORES.forEach(c => { el.innerHTML += `<option value="${c}">${c}</option>`; });
+                    el.value = val;
+                }
+            });
+        }
+
         // --- GERENCIAR TURMAS ---
         function adicionarOuAtualizarTurma() {
             const id = document.getElementById('input-id-turma-edicao').value;
@@ -650,7 +525,6 @@
             const fotoInput = document.getElementById('input-foto-turma');
 
             if (!nome) return alert('Digite o nome da turma!');
-
             const processarSalvar = (fotoBase64) => {
                 if (id) {
                     let turma = dados.turmas.find(t => t.id == id);
@@ -747,52 +621,11 @@
             restaurarInterface();
         }
 
-        // ADICIONAR ALUNO MANUALMENTE E INDIVIDUALMENTE
-        function adicionarAlunoIndividualManualmente() {
-            const turmaId = document.getElementById('select-visualizar-turma').value;
-            const nomeInput = document.getElementById('input-nome-novo-aluno');
-            const corSelect = document.getElementById('select-cor-novo-aluno');
-
-            if (!turmaId) return alert('Selecione uma turma primeiro!');
-            const nome = nomeInput.value.trim();
-            const cor = corSelect.value;
-
-            if (!nome) return alert('Digite o nome do aluno!');
-
-            let turma = dados.turmas.find(t => t.id == turmaId);
-            if (!turma) return;
-
-            if (!turma.alunos) turma.alunos = { Verde: [], Amarelo: [], Vermelho: [], Azul: [] };
-            if (!turma.alunos[cor]) turma.alunos[cor] = [];
-
-            turma.alunos[cor].push(nome);
-            salvarDados();
-
-            nomeInput.value = '';
-            carregarAlunosDaTurma();
-            renderizarAlunosPorCorGeral();
-            alert(`Aluno "${nome}" adicionado com sucesso à Equipe ${cor}!`);
-        }
-
-        // REMOVER ALUNO INDIVIDUALMENTE
-        function removerAlunoIndividual(turmaId, cor, index) {
-            let turma = dados.turmas.find(t => t.id == turmaId);
-            if (!turma || !turma.alunos || !turma.alunos[cor]) return;
-
-            const nomeAluno = turma.alunos[cor][index];
-            if (confirm(`Tem certeza que deseja remover o aluno "${nomeAluno}" da Equipe ${cor}?`)) {
-                turma.alunos[cor].splice(index, 1);
-                salvarDados();
-                carregarAlunosDaTurma();
-                renderizarAlunosPorCorGeral();
-            }
-        }
-
         function carregarAlunosDaTurma() {
             const turmaId = document.getElementById('select-visualizar-turma').value;
             const painel = document.getElementById('painel-detalhes-turma');
             const grid = document.getElementById('grid-alunos-turma-selecionada');
-                        
+            
             if (!turmaId) {
                 painel.style.display = 'none';
                 return;
@@ -811,12 +644,7 @@
                     <div class="card-equipe ${cor.toLowerCase()}">
                         <h3>Equipe ${cor} (${lista.length})</h3>
                         <ul>
-                            ${lista.map((aluno, index) => `
-                                <li class="item-aluno">
-                                    <span>${aluno}</span>
-                                    <button class="btn-excluir-aluno no-print" onclick="removerAlunoIndividual(${turma.id}, '${cor}', ${index})" title="Remover aluno">✖</button>
-                                </li>
-                            `).join('')}
+                            ${lista.map(aluno => `<li>${aluno}</li>`).join('')}
                         </ul>
                     </div>
                 `;
@@ -857,25 +685,26 @@
 
         function renderizarAlunosPorCorGeral() {
             const grid = document.getElementById('grid-geral-cores');
-            if (!grid) return;
+            if(!grid) return;
             grid.innerHTML = '';
 
             CORES.forEach(cor => {
-                let totalCor = [];
+                let totalAlunos = 0;
+                let htmlLista = '';
+
                 dados.turmas.forEach(t => {
-                    if (t.alunos && t.alunos[cor]) {
-                        t.alunos[cor].forEach(aluno => totalCor.push(`${aluno} <small>(${t.nome})</small>`));
+                    if(t.alunos && t.alunos[cor] && t.alunos[cor].length > 0) {
+                        totalAlunos += t.alunos[cor].length;
+                        htmlLista += `<li style="font-weight:600;margin-top:6px;list-style:none;">${t.nome}:</li>`;
+                        t.alunos[cor].forEach(a => { htmlLista += `<li>${a}</li>`; });
                     }
                 });
 
                 grid.innerHTML += `
                     <div class="card-equipe ${cor.toLowerCase()}">
-                        <h3>Equipe ${cor} (${totalCor.length})</h3>
-                        <ul>
-                            ${totalCor.map(a => `<li style="padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">${a}</li>`).join('')}
-                        </ul>
-                    </div>
-                `;
+                        <h3>Equipe ${cor} (${totalAlunos})</h3>
+                        <ul>${htmlLista || '<li>Nenhum aluno cadastrado.</li>'}</ul>
+                    </div>`;
             });
         }
 
@@ -914,7 +743,7 @@
         }
 
         function excluirProva(id) {
-            if (confirm("Excluir esta prova? Se houver rodadas vinculadas elas também serão removidas.")) {
+            if (confirm("Deseja excluir esta prova?")) {
                 dados.provas = dados.provas.filter(p => p.id != id);
                 dados.rodadas = dados.rodadas.filter(r => r.provaId != id);
                 salvarDados();
@@ -924,6 +753,7 @@
 
         function renderizarProvas() {
             const tbody = document.getElementById('tabela-provas-corpo');
+            if(!tbody) return;
             tbody.innerHTML = '';
             dados.provas.forEach(p => {
                 tbody.innerHTML += `
@@ -937,35 +767,38 @@
             });
         }
 
-        // --- RODADAS & RESULTADOS ---
+        // --- RODADAS ---
         function salvarRodada() {
-            const idEdicao = document.getElementById('input-id-rodada-edicao').value;
+            const id = document.getElementById('input-id-rodada-edicao').value;
             const turmaId = document.getElementById('select-turma-rodada').value;
             const provaId = document.getElementById('select-prova-rodada').value;
-            const r1 = document.getElementById('res-1').value;
-            const r2 = document.getElementById('res-2').value;
-            const r3 = document.getElementById('res-3').value;
-            const r4 = document.getElementById('res-4').value;
 
-            if (!turmaId || !provaId) return alert('Selecione Turma e Prova!');
-            
-            let selecoes = [r1, r2, r3, r4];
-            let unicos = new Set(selecoes);
-            if (unicos.size !== 4) return alert('Selecione uma cor diferente para cada posição!');
+            const res1 = document.getElementById('res-1').value;
+            const res2 = document.getElementById('res-2').value;
+            const res3 = document.getElementById('res-3').value;
+            const res4 = document.getElementById('res-4').value;
 
-            if (idEdicao) {
-                let rodada = dados.rodadas.find(r => r.id == idEdicao);
-                if (rodada) {
+            if(!turmaId || !provaId) return alert('Selecione a turma e a prova!');
+            if(!res1 || !res2 || !res3 || !res4) return alert('Selecione todas as colocações!');
+
+            const selecoes = [res1, res2, res3, res4];
+            if (new Set(selecoes).size !== 4) return alert('Selecione uma cor diferente para cada colocação!');
+
+            const resultados = { 1: res1, 2: res2, 3: res3, 4: res4 };
+
+            if(id) {
+                let rodada = dados.rodadas.find(r => r.id == id);
+                if(rodada) {
                     rodada.turmaId = turmaId;
                     rodada.provaId = provaId;
-                    rodada.posicoes = { 1: r1, 2: r2, 3: r3, 4: r4 };
+                    rodada.resultados = resultados;
                 }
             } else {
                 dados.rodadas.push({
                     id: Date.now(),
                     turmaId: turmaId,
                     provaId: provaId,
-                    posicoes: { 1: r1, 2: r2, 3: r3, 4: r4 }
+                    resultados: resultados
                 });
             }
 
@@ -975,18 +808,17 @@
         }
 
         function editarRodada(id) {
-            let rodada = dados.rodadas.find(r => r.id == id);
-            if (!rodada) return;
-
+            const rodada = dados.rodadas.find(r => r.id == id);
+            if(!rodada) return;
             document.getElementById('input-id-rodada-edicao').value = rodada.id;
             document.getElementById('select-turma-rodada').value = rodada.turmaId;
             document.getElementById('select-prova-rodada').value = rodada.provaId;
-            document.getElementById('res-1').value = rodada.posicoes[1];
-            document.getElementById('res-2').value = rodada.posicoes[2];
-            document.getElementById('res-3').value = rodada.posicoes[3];
-            document.getElementById('res-4').value = rodada.posicoes[4];
+            document.getElementById('res-1').value = rodada.resultados[1];
+            document.getElementById('res-2').value = rodada.resultados[2];
+            document.getElementById('res-3').value = rodada.resultados[3];
+            document.getElementById('res-4').value = rodada.resultados[4];
 
-            document.getElementById('btn-salvar-rodada').innerText = "Atualizar Resultado";
+            document.getElementById('btn-salvar-rodada').innerText = "Atualizar Rodada";
             document.getElementById('btn-cancelar-rodada').style.display = "inline-flex";
         }
 
@@ -997,7 +829,7 @@
         }
 
         function excluirRodada(id) {
-            if (confirm("Excluir o lançamento desta rodada?")) {
+            if(confirm("Excluir esta rodada?")) {
                 dados.rodadas = dados.rodadas.filter(r => r.id != id);
                 salvarDados();
                 restaurarInterface();
@@ -1006,18 +838,18 @@
 
         function renderizarRodadas() {
             const tbody = document.getElementById('tabela-historico-rodadas');
+            if(!tbody) return;
             tbody.innerHTML = '';
+
             dados.rodadas.forEach(r => {
-                let turma = dados.turmas.find(t => t.id == r.turmaId);
-                let prova = dados.provas.find(p => p.id == r.provaId);
-                
+                const t = dados.turmas.find(x => x.id == r.turmaId) || { nome: 'Turma Removida' };
+                const p = dados.provas.find(x => x.id == r.provaId) || { nome: 'Prova Removida' };
+
                 tbody.innerHTML += `
                     <tr>
-                        <td><strong>${turma ? turma.nome : 'Excluída'}</strong></td>
-                        <td>${prova ? prova.nome : 'Excluída'}</td>
-                        <td>
-                            🥇 ${r.posicoes[1]} | 🥈 ${r.posicoes[2]} | 🥉 ${r.posicoes[3]} | 4º ${r.posicoes[4]}
-                        </td>
+                        <td><strong>${t.nome}</strong></td>
+                        <td>${p.nome}</td>
+                        <td>1º: ${r.resultados[1]} | 2º: ${r.resultados[2]} | 3º: ${r.resultados[3]} | 4º: ${r.resultados[4]}</td>
                         <td class="acoes-celula">
                             <button class="btn btn-warning" onclick="editarRodada(${r.id})">✏️ Editar</button>
                             <button class="btn btn-danger" onclick="excluirRodada(${r.id})">🗑️ Excluir</button>
@@ -1031,18 +863,11 @@
             const turmaId = document.getElementById('select-turma-arrecadacao').value;
             const equipe = document.getElementById('select-equipe-arrecadacao').value;
             const item = document.getElementById('input-item-arrecadacao').value.trim();
-            const qtd = parseFloat(document.getElementById('input-qtd-arrecadacao').value) || 0;
+            const qtd = Number(document.getElementById('input-qtd-arrecadacao').value) || 0;
 
-            if (!turmaId || !item || qtd <= 0) return alert('Preencha os campos corretamente!');
+            if(!turmaId || !item || qtd <= 0) return alert('Preencha os campos de arrecadação corretamente!');
 
-            dados.arrecadacao.push({
-                id: Date.now(),
-                turmaId: turmaId,
-                equipe: equipe,
-                item: item,
-                qtd: qtd
-            });
-
+            dados.arrecadacao.push({ id: Date.now(), turmaId, equipe, item, qtd });
             salvarDados();
             document.getElementById('input-item-arrecadacao').value = '';
             document.getElementById('input-qtd-arrecadacao').value = '1';
@@ -1050,7 +875,7 @@
         }
 
         function excluirArrecadacao(id) {
-            if (confirm("Remover este item arrecadado?")) {
+            if(confirm("Excluir este item de arrecadação?")) {
                 dados.arrecadacao = dados.arrecadacao.filter(a => a.id != id);
                 salvarDados();
                 restaurarInterface();
@@ -1059,13 +884,15 @@
 
         function renderizarArrecadacao() {
             const tbody = document.getElementById('tabela-arrecadacao');
+            if(!tbody) return;
             tbody.innerHTML = '';
+
             dados.arrecadacao.forEach(a => {
-                let turma = dados.turmas.find(t => t.id == a.turmaId);
+                const t = dados.turmas.find(x => x.id == a.turmaId) || { nome: 'Turma Removida' };
                 tbody.innerHTML += `
                     <tr>
-                        <td>${turma ? turma.nome : 'Excluída'}</td>
-                        <td><strong>Equipe ${a.equipe}</strong></td>
+                        <td>${t.nome}</td>
+                        <td><strong>${a.equipe}</strong></td>
                         <td>${a.item}</td>
                         <td><strong>${a.qtd}</strong></td>
                         <td><button class="btn btn-danger" onclick="excluirArrecadacao(${a.id})">🗑️</button></td>
@@ -1073,41 +900,38 @@
             });
         }
 
-        // --- CÁLCULOS & CLASSIFICAÇÃO ---
-        function calcularPontuacaoGeral() {
-            let totais = { Verde: 0, Amarelo: 0, Vermelho: 0, Azul: 0 };
+        // --- CLASSIFICAÇÃO GERAL E POR TURMA ---
+        function atualizarClassificacaoGeral() {
+            const tbody = document.getElementById('tabela-classificacao-geral');
+            if(!tbody) return;
+            tbody.innerHTML = '';
+
+            let pontosTotais = { Verde: 0, Amarelo: 0, Vermelho: 0, Azul: 0 };
 
             dados.rodadas.forEach(r => {
-                for (let pos in r.posicoes) {
-                    let cor = r.posicoes[pos];
-                    if (totais[cor] !== undefined) {
-                        totais[cor] += PONTOS_POSICAO[pos] || 0;
+                for (let pos in r.resultados) {
+                    let cor = r.resultados[pos];
+                    if (pontosTotais[cor] !== undefined) {
+                        pontosTotais[cor] += PONTOS_POSICAO[pos] || 0;
                     }
                 }
             });
 
             dados.arrecadacao.forEach(a => {
-                if (totais[a.equipe] !== undefined) {
-                    totais[a.equipe] += a.qtd;
+                if (pontosTotais[a.equipe] !== undefined) {
+                    pontosTotais[a.equipe] += Number(a.qtd) || 0;
                 }
             });
 
-            return Object.keys(totais).map(cor => ({ cor: cor, pontos: totais[cor] }))
-                .sort((a, b) => b.pontos - a.pontos);
-        }
-
-        function atualizarClassificacaoGeral() {
-            const tbody = document.getElementById('tabela-classificacao-geral');
-            const ranking = calcularPontuacaoGeral();
-            tbody.innerHTML = '';
+            let ranking = CORES.map(cor => ({ cor: cor, pontos: pontosTotais[cor] }))
+                              .sort((a, b) => b.pontos - a.pontos);
 
             ranking.forEach((item, index) => {
-                let medalha = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '4º';
                 tbody.innerHTML += `
                     <tr>
-                        <td><strong>${medalha} ${index + 1}º Lugar</strong></td>
-                        <td><strong>Equipe ${item.cor}</strong></td>
-                        <td><strong>${item.pontos} Pts</strong></td>
+                        <td><strong>${index + 1}º Lugar</strong></td>
+                        <td><strong style="color: var(--cor-${item.cor.toLowerCase()});">${item.cor}</strong></td>
+                        <td><strong>${item.pontos} pts</strong></td>
                     </tr>`;
             });
         }
@@ -1115,78 +939,144 @@
         function atualizarClassificacaoPorTurma() {
             const turmaId = document.getElementById('select-filtro-turma-classificacao').value;
             const tbody = document.getElementById('tabela-classificacao-turma');
+            if(!tbody) return;
             tbody.innerHTML = '';
 
-            if (!turmaId) return;
+            if(!turmaId) return;
 
-            let totais = { Verde: 0, Amarelo: 0, Vermelho: 0, Azul: 0 };
+            let pontosTurma = { Verde: 0, Amarelo: 0, Vermelho: 0, Azul: 0 };
 
             dados.rodadas.filter(r => r.turmaId == turmaId).forEach(r => {
-                for (let pos in r.posicoes) {
-                    let cor = r.posicoes[pos];
-                    if (totais[cor] !== undefined) totais[cor] += PONTOS_POSICAO[pos] || 0;
+                for (let pos in r.resultados) {
+                    let cor = r.resultados[pos];
+                    if (pontosTurma[cor] !== undefined) {
+                        pontosTurma[cor] += PONTOS_POSICAO[pos] || 0;
+                    }
                 }
             });
 
             dados.arrecadacao.filter(a => a.turmaId == turmaId).forEach(a => {
-                if (totais[a.equipe] !== undefined) totais[a.equipe] += a.qtd;
+                if (pontosTurma[a.equipe] !== undefined) {
+                    pontosTurma[a.equipe] += Number(a.qtd) || 0;
+                }
             });
 
-            let ranking = Object.keys(totais).map(cor => ({ cor: cor, pontos: totais[cor] }))
-                .sort((a, b) => b.pontos - a.pontos);
+            let ranking = CORES.map(cor => ({ cor: cor, pontos: pontosTurma[cor] }))
+                              .sort((a, b) => b.pontos - a.pontos);
 
             ranking.forEach((item, index) => {
                 tbody.innerHTML += `
                     <tr>
                         <td><strong>${index + 1}º Lugar</strong></td>
-                        <td><strong>Equipe ${item.cor}</strong></td>
-                        <td><strong>${item.pontos} Pts</strong></td>
+                        <td><strong style="color: var(--cor-${item.cor.toLowerCase()});">${item.cor}</strong></td>
+                        <td><strong>${item.pontos} pts</strong></td>
                     </tr>`;
             });
         }
 
-        function atualizarSelects() {
-            const selectsTurma = [
-                'select-filtro-turma-classificacao', 'select-visualizar-turma',
-                'select-turma-sorteio', 'select-turma-rodada', 'select-turma-arrecadacao'
-            ];
+        // --- GERADOR DE BOLETIM E FICHA DA TURMA POR CORES ---
+        function gerarBoletimPersonalizado() {
+            const container = document.getElementById('boletim-conteudo-dinamico');
+            if(!container) return;
 
-            selectsTurma.forEach(id => {
-                const select = document.getElementById(id);
-                if (!select) return;
-                const valorAtual = select.value;
-                select.innerHTML = '<option value="">Selecione a Turma...</option>';
-                dados.turmas.forEach(t => {
-                    select.innerHTML += `<option value="${t.id}">${t.nome}</option>`;
-                });
-                select.value = valorAtual;
-            });
+            const turmaId = document.getElementById('select-imprimir-turma-unica').value;
+            const tipoImpressaoTurma = document.getElementById('select-tipo-impressao-turma').value;
 
-            const selectsProva = ['select-prova-rodada'];
-            selectsProva.forEach(id => {
-                const select = document.getElementById(id);
-                if (!select) return;
-                const valorAtual = select.value;
-                select.innerHTML = '<option value="">Selecione a Prova...</option>';
-                dados.provas.forEach(p => {
-                    select.innerHTML += `<option value="${p.id}">${p.nome}</option>`;
-                });
-                select.value = valorAtual;
-            });
+            let html = '';
 
-            const posSelects = ['res-1', 'res-2', 'res-3', 'res-4'];
-            posSelects.forEach((id, index) => {
-                const select = document.getElementById(id);
-                if (!select) return;
-                select.innerHTML = '';
-                CORES.forEach((cor, cIdx) => {
-                    let sel = (cIdx === index) ? 'selected' : '';
-                    select.innerHTML += `<option value="${cor}" ${sel}>${cor}</option>`;
+            // Se selecionou uma turma específica para imprimir
+            if (turmaId) {
+                const turma = dados.turmas.find(t => t.id == turmaId);
+                if (!turma) return;
+
+                if (tipoImpressaoTurma === 'ficha-cores') {
+                    // IMPRESSÃO: APENAS TURMA E ALUNOS EM CADA COR
+                    html += `
+                        <div style="text-align:center; margin-bottom: 20px;">
+                            ${dados.config.logoEvento ? `<img src="${dados.config.logoEvento}" style="max-height: 60px; margin-bottom: 10px;">` : ''}
+                            <h2 style="border:none; margin:0; padding:0; justify-content:center; color: var(--verde-bomjesus);">${dados.config.titulo}</h2>
+                            <h3 style="margin:5px 0 0 0; color: var(--texto-principal);">Ficha da Turma por Equipes: ${turma.nome}</h3>
+                            <p style="margin:2px 0 0 0; color: var(--texto-secundario); font-size:13px;">Listagem de Alunos em Cada Cor</p>
+                        </div>
+                        <div class="grid-impressao-turma">`;
+
+                    CORES.forEach(cor => {
+                        const lista = (turma.alunos && turma.alunos[cor]) ? turma.alunos[cor] : [];
+                        html += `
+                            <div class="coluna-impressao-cor ${cor.toLowerCase()}">
+                                <h4>${cor} (${lista.length})</h4>
+                                <ol>`;
+                        if (lista.length === 0) {
+                            html += `<li style="list-style:none; opacity:0.6;">Nenhum aluno</li>`;
+                        } else {
+                            lista.forEach(aluno => { html += `<li>${aluno}</li>`; });
+                        }
+                        html += `</ol></div>`;
+                    });
+
+                    html += `</div>`;
+                } else {
+                    // RESUMO DA TURMA
+                    html += `
+                        <div style="text-align:center; margin-bottom:20px;">
+                            <h2 style="border:none; margin:0; padding:0; justify-content:center;">${dados.config.titulo}</h2>
+                            <h3>Relatório da Turma: ${turma.nome}</h3>
+                        </div>`;
+                }
+
+                container.innerHTML = html;
+                return;
+            }
+
+            // SE NENHUMA TURMA FOR SELECIONADA: GERAR BOLETIM GERAL PADRÃO
+            const chkLogo = document.getElementById('chk-imprimir-logo').checked;
+            const chkGeral = document.getElementById('chk-imprimir-classificacao-geral').checked;
+            const chkAlunosGeral = document.getElementById('chk-imprimir-alunos-geral').checked;
+
+            if (chkLogo && dados.config.logoEvento) {
+                html += `<div style="text-align:center; margin-bottom:20px;"><img src="${dados.config.logoEvento}" style="max-height:70px;"></div>`;
+            }
+
+            html += `<div style="text-align:center; margin-bottom:25px;">
+                <h1 style="margin:0; font-size:22px; color: var(--verde-bomjesus);">${dados.config.titulo}</h1>
+                <div style="font-size:14px; color: var(--texto-secundario);">${dados.config.subtitulo}</div>
+            </div>`;
+
+            if (chkGeral) {
+                html += `<h3>🏆 Classificação Geral das Equipes</h3>
+                <table><thead><tr><th>Posição</th><th>Equipe</th><th>Pontuação</th></tr></thead><tbody>`;
+                let pontosTotais = { Verde: 0, Amarelo: 0, Vermelho: 0, Azul: 0 };
+                dados.rodadas.forEach(r => { for (let p in r.resultados) pontosTotais[r.resultados[p]] += PONTOS_POSICAO[p]; });
+                dados.arrecadacao.forEach(a => { pontosTotais[a.equipe] += Number(a.qtd); });
+
+                CORES.map(c => ({ cor: c, pts: pontosTotais[c] }))
+                     .sort((a,b) => b.pts - a.pts)
+                     .forEach((item, idx) => {
+                         html += `<tr><td>${idx + 1}º Lugar</td><td><strong>${item.cor}</strong></td><td><strong>${item.pts} pts</strong></td></tr>`;
+                     });
+                html += `</tbody></table><br>`;
+            }
+
+            if (chkAlunosGeral) {
+                html += `<h3>🎨 Alunos por Equipe em Toda a Escola</h3><div class="grid-impressao-turma">`;
+                CORES.forEach(cor => {
+                    let total = 0;
+                    let lis = '';
+                    dados.turmas.forEach(t => {
+                        if (t.alunos && t.alunos[cor]) {
+                            total += t.alunos[cor].length;
+                            t.alunos[cor].forEach(a => { lis += `<li>${a} <small>(${t.nome})</small></li>`; });
+                        }
+                    });
+                    html += `<div class="coluna-impressao-cor ${cor.toLowerCase()}"><h4>${cor} (${total})</h4><ol>${lis || '<li style="list-style:none;">Sem alunos</li>'}</ol></div>`;
                 });
-            });
+                html += `</div>`;
+            }
+
+            container.innerHTML = html;
         }
 
-        // --- CABEÇALHO & CONFIGURAÇÃO ---
+        // --- CONFIGURAÇÕES DE CABEÇALHO ---
         function salvarTextosCabecalho() {
             dados.config.titulo = document.getElementById('input-edit-titulo-cabecalho').value;
             dados.config.subtitulo = document.getElementById('input-edit-subtitulo-cabecalho').value;
@@ -1197,88 +1087,29 @@
         }
 
         function salvarTituloEvento() {
-            dados.config.titulo = document.getElementById('input-edit-titulo').value;
-            historicoCampeonatos.lista[historicoCampeonatos.ativoId].nome = dados.config.titulo;
-            salvarDados();
-            atualizarDropdownCampeonatos();
-            restaurarInterface();
-            alert('Nome da competição alterado!');
-        }
-
-        function carregarImagemLocal(e, targetId) {
-            const file = e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(evt) {
-                dados.config.logoEvento = evt.target.result;
+            const valor = document.getElementById('input-edit-titulo').value.trim();
+            if(valor) {
+                dados.config.titulo = valor;
                 salvarDados();
                 restaurarInterface();
-            };
-            reader.readAsDataURL(file);
+                alert('Nome atualizado!');
+            }
         }
 
-        // --- IMPRESSÃO / BOLETIM ---
-        function gerarBoletimPersonalizado() {
-            const folha = document.getElementById('boletim-conteudo-dinamico');
-            if (!folha) return;
-
-            let html = '';
-
-            if (document.getElementById('chk-imprimir-logo').checked) {
-                html += `
-                    <div style="text-align:center; border-bottom:2px solid var(--verde-bomjesus); padding-bottom:15px; margin-bottom:20px;">
-                        ${dados.config.logoEvento ? `<img src="${dados.config.logoEvento}" style="max-height:70px; margin-bottom:10px;">` : ''}
-                        <h2 style="margin:0; border:none; padding:0; justify-content:center;">${dados.config.titulo}</h2>
-                        <p style="margin:5px 0 0 0; color:var(--texto-secundario);">${dados.config.subtitulo}</p>
-                    </div>`;
+        function carregarImagemLocal(evt, idImgTarget) {
+            const file = evt.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = e => {
+                    dados.config.logoEvento = e.target.result;
+                    salvarDados();
+                    restaurarInterface();
+                };
+                reader.readAsDataURL(file);
             }
-
-            if (document.getElementById('chk-imprimir-classificacao-geral').checked) {
-                html += `<h3>🏆 Classificação Geral</h3>`;
-                let geral = calcularPontuacaoGeral();
-                html += `<table><thead><tr><th>Posição</th><th>Equipe</th><th>Pontos</th></tr></thead><tbody>`;
-                geral.forEach((g, idx) => {
-                    html += `<tr><td>${idx+1}º Lugar</td><td>Equipe ${g.cor}</td><td><strong>${g.pontos} Pts</strong></td></tr>`;
-                });
-                html += `</tbody></table><br>`;
-            }
-
-            if (document.getElementById('chk-imprimir-alunos-geral').checked) {
-                html += `<h3>🎨 Quantitativo de Alunos por Equipe</h3><div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px;">`;
-                CORES.forEach(c => {
-                    let total = 0;
-                    dados.turmas.forEach(t => { if(t.alunos && t.alunos[c]) total += t.alunos[c].length; });
-                    html += `<div style="flex:1; background:#f8fafc; border:1px solid #cbd5e1; padding:10px; border-radius:8px; text-align:center;"><strong>${c}:</strong> ${total} alunos</div>`;
-                });
-                html += `</div>`;
-            }
-
-            if (document.getElementById('chk-imprimir-rodadas').checked) {
-                html += `<h3>⚡ Histórico de Rodadas</h3><table><thead><tr><th>Turma</th><th>Prova</th><th>Resultado</th></tr></thead><tbody>`;
-                dados.rodadas.forEach(r => {
-                    let turma = dados.turmas.find(t => t.id == r.turmaId);
-                    let prova = dados.provas.find(p => p.id == r.provaId);
-                    html += `<tr><td>${turma ? turma.nome : ''}</td><td>${prova ? prova.nome : ''}</td><td>1º:${r.posicoes[1]} | 2º:${r.posicoes[2]} | 3º:${r.posicoes[3]} | 4º:${r.posicoes[4]}</td></tr>`;
-                });
-                html += `</tbody></table><br>`;
-            }
-
-            if (document.getElementById('chk-imprimir-arrecadacao').checked) {
-                html += `<h3>📦 Resumo da Arrecadação</h3><table><thead><tr><th>Turma</th><th>Equipe</th><th>Item</th><th>Qtd/Pts</th></tr></thead><tbody>`;
-                dados.arrecadacao.forEach(a => {
-                    let turma = dados.turmas.find(t => t.id == a.turmaId);
-                    html += `<tr><td>${turma ? turma.nome : ''}</td><td>Equipe ${a.equipe}</td><td>${a.item}</td><td>${a.qtd}</td></tr>`;
-                });
-                html += `</tbody></table>`;
-            }
-
-            folha.innerHTML = html || '<p style="text-align:center; color:#888;">Nenhuma opção selecionada para exibição no boletim.</p>';
         }
 
-        // INICIALIZAÇÃO
-        window.onload = function() {
-            carregarDados();
-        };
+        window.onload = carregarDados;
     </script>
 </body>
 </html>
